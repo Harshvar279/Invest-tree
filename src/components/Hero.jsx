@@ -217,22 +217,21 @@ export default function Hero() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-obsidian-900/40 via-transparent to-obsidian-900" />
       </div>
 
-            {/* Founder Portrait — massive, cinematic */}
+      {/* Founder Portrait — massive, cinematic */}
       <div
         ref={portraitRef}
-        className="hero-parallax pointer-events-none absolute inset-x-0 bottom-0 z-10 mx-auto flex h-full w-full items-end justify-center"
+        className="hero-parallax pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-full w-full items-end justify-end md:justify-center pr-2 md:pr-0"
       >
-        {/* FIX 1: Changed w-[58%] to w-[95%] so his face isn't squeezed on mobile */}
-        <div className="relative h-[75%] w-[95%] max-w-[640px] md:h-[88%] md:w-[44%]">
+        <div className="relative h-[75%] w-[85%] max-w-[640px] md:h-[88%] md:w-[44%]">
           <div
-            {/* FIX 2: Changed bg-center to bg-[center_top] so his head stays in frame */}
-            className="absolute inset-0 bg-cover bg-[center_top] bg-no-repeat"
+            className="absolute inset-0 bg-cover bg-[20%_top] bg-no-repeat"
             style={{
               backgroundImage: "url('/front-page.PNG')",
+              /* Expanded the black mask from 55% to 65% so it stops slicing his cheek! */
               maskImage:
-                'linear-gradient(to bottom, black 70%, transparent 100%), radial-gradient(ellipse at 50% 40%, black 55%, transparent 80%)',
+                'linear-gradient(to bottom, black 70%, transparent 100%), radial-gradient(ellipse at 50% 45%, black 65%, transparent 90%)',
               WebkitMaskImage:
-                'linear-gradient(to bottom, black 70%, transparent 100%), radial-gradient(ellipse at 50% 40%, black 55%, transparent 80%)',
+                'linear-gradient(to bottom, black 70%, transparent 100%), radial-gradient(ellipse at 50% 45%, black 65%, transparent 90%)',
               maskComposite: 'intersect',
               WebkitMaskComposite: 'source-in',
               filter: 'grayscale(0.25) contrast(1.08) brightness(0.92)',
