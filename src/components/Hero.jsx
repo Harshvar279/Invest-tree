@@ -225,7 +225,7 @@ export default function Hero() {
         <div
           className="absolute inset-0 bg-cover bg-right bg-no-repeat"
           style={{
-            backgroundImage: "url('/front-page.PNG')",
+            backgroundImage: "url('/front-page.JPG')",
             maskImage:
               'linear-gradient(to bottom, black 75%, transparent 100%), linear-gradient(to right, transparent 0%, black 30%, black 100%)',
             WebkitMaskImage:
