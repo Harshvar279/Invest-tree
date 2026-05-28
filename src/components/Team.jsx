@@ -8,31 +8,31 @@ const team = [
   {
     name: 'Satish Kumar Kuleria',
     role: 'Founder',
-    img: 'https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=900&auto=format&fit=crop',
+    img: '/founder.JPG',
     note: 'Sets the firm\'s philosophy — counsel before commission.',
   },
   {
     name: 'Rohit Yadav',
     role: 'Manager',
-    img: 'https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?q=80&w=900&auto=format&fit=crop',
+    img: '/rohit-yadav.JPG',
     note: 'Orchestrates every mandate from brief to handover.',
   },
   {
     name: 'Mayank Aggarwal',
     role: 'Senior Sales Executive',
-    img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=900&auto=format&fit=crop',
+    img: '/mayank.JPG',
     note: 'Negotiates allocations with India\'s top developers.',
   },
   {
     name: 'Sachin',
     role: 'Marketing Head',
-    img: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=900&auto=format&fit=crop',
+    img: '/sachin.JPG',
     note: 'Curates the brand voice and client narrative.',
   },
   {
     name: 'Rohit Thakur',
     role: 'Team Leader',
-    img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=900&auto=format&fit=crop',
+    img: '/rohit-thakur.JPG',
     note: 'Leads the field team across Gurugram micro-markets.',
   },
 ];
