@@ -257,10 +257,9 @@ export default function Hero() {
 
         {/* Main heading */}
         <div className="hero-fade-out relative">
-          <h1 className="display-heading text-[18vw] leading-[0.85] md:text-[13vw] lg:text-[11.5vw]">
-            <SplitChars text="Invest" delay={1.9} />
-            <br />
-            <span className="serif-italic gold-text inline-block">
+          <h1 className="display-heading flex flex-col text-[18vw] leading-[0.85] md:text-[13vw] lg:text-[11.5vw]">
+            <span><SplitChars text="Invest" delay={1.9} /></span>
+            <span className="serif-italic text-gold-400">
               <SplitChars text="Tree." delay={2.25} />
             </span>
           </h1>
@@ -271,10 +270,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 2.6, duration: 1, ease: 'easeOut' }}
-              className="max-w-md font-serif text-lg italic text-pearl/80 md:text-xl"
+              className="max-w-md font-sans text-sm md:text-base tracking-[0.2em] uppercase text-pearl/90"
             >
-              Where skylines take root. <br />
-              Your satisfaction, our expertise.
+              YOUR SATISFACTION, OUR EXPERTISE.
             </motion.p>
 
             <motion.div
