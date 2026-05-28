@@ -73,7 +73,8 @@ export default function Manifesto() {
     <section
       id="manifesto"
       ref={ref}
-      className="relative bg-obsidian-900 py-28 md:py-40"
+      className="relative py-40 md:py-56"
+      style={{ backgroundColor: '#0A0A0A' }}
     >
       <div className="container-x">
         <div className="grid grid-cols-12 gap-8">
@@ -90,7 +91,7 @@ export default function Manifesto() {
               </span>
             </h2>
 
-            <p className="mt-10 max-w-2xl font-serif text-lg leading-relaxed text-pearl/70 md:text-xl">
+            <p className="mt-12 max-w-2xl font-serif text-lg leading-relaxed text-pearl/70 md:text-xl">
               Invest Tree is a private real-estate consultancy serving discerning
               families and investors across Gurugram. We deal in premium
               residences, luxury villas, commercial assets, plots and gated
@@ -101,7 +102,7 @@ export default function Manifesto() {
           </div>
         </div>
 
-        <div className="mt-24 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-14">
+        <div className="mt-32 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-14">
           {pillars.map((p) => (
             <div key={p.n} className="pillar border-t border-gold-500/20 pt-6">
               <p className="font-sans text-[11px] uppercase tracking-widest2 text-gold-300">
