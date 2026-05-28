@@ -217,7 +217,7 @@ export default function Hero() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-obsidian-900/40 via-transparent to-obsidian-900" />
       </div>
 
-            {/* Founder Portrait — perfectly blended & resized */}
+     {/* Founder Portrait — perfectly blended & resized */}
       <div
         ref={portraitRef}
         {/* FIX 1: Shorter on mobile (h-[55vh]), and locked to a max width of 50% on desktop so it never blocks the left side! */}
