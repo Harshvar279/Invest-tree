@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --gold: #c8a24b;
-    --obsidian: #0a0a0b;
+    --obsidian: #0A0A0A;
     --pearl: #f4efe6;
   }
 
@@ -16,7 +16,7 @@
 
   html,
   body {
-    background: #0a0a0b;
+    background: #0A0A0A;
     color: #f4efe6;
     font-family: 'Inter', system-ui, sans-serif;
     overflow-x: hidden;
@@ -24,14 +24,14 @@
 
   ::selection {
     background: #c8a24b;
-    color: #0a0a0b;
+    color: #0A0A0A;
   }
 
   ::-webkit-scrollbar {
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #050506;
+    background: #070707;
   }
   ::-webkit-scrollbar-thumb {
     background: #1a1a1f;
@@ -66,6 +66,10 @@
 
   .btn-gold {
     @apply inline-flex items-center gap-3 border border-gold-400/60 px-7 py-3 text-[11px] uppercase tracking-widest2 text-gold-200 transition-all duration-500 hover:bg-gold-400 hover:text-obsidian;
+  }
+
+  .btn-whatsapp {
+    @apply inline-flex items-center gap-3 border border-[#25D366]/40 bg-[#25D366]/5 px-7 py-3 text-[11px] uppercase tracking-widest2 text-[#25D366] transition-all duration-500 hover:bg-[#25D366] hover:text-obsidian;
   }
 
   .gold-text {
@@ -134,6 +138,22 @@
 }
 .marquee-track {
   animation: marquee 40s linear infinite;
+}
+
+/* Modal animations */
+@keyframes modal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes modal-slide-up {
+  from { opacity: 0; transform: translateY(40px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal-overlay {
+  animation: modal-fade-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.modal-content {
+  animation: modal-slide-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 /* Cursor target */
