@@ -12,28 +12,28 @@ const team = [
     note: 'Sets the firm\'s philosophy — counsel before commission.',
   },
   {
-    name: 'Rohit Yadav',
+    name: 'Rohit Thakur',
+    role: 'Managing Director',
+    img: '/rohit-thakur.JPG',
+    note: 'Leads the field team across Gurugram micro-markets.',
+  },
+  {
+    name: 'Rohit Kumar',
     role: 'Manager',
     img: '/rohit-yadav.JPG',
     note: 'Orchestrates every mandate from brief to handover.',
   },
   {
-    name: 'Mayank Aggarwal',
-    role: 'Senior Sales Executive',
-    img: '/mayank.JPG',
-    note: 'Negotiates allocations with India\'s top developers.',
-  },
-  {
-    name: 'Sachin',
+    name: 'Sachin Jangra',
     role: 'Marketing Head',
     img: '/sachin.JPG',
     note: 'Curates the brand voice and client narrative.',
   },
   {
-    name: 'Rohit Thakur',
-    role: 'Team Leader',
-    img: '/rohit-thakur.JPG',
-    note: 'Leads the field team across Gurugram micro-markets.',
+    name: 'Mayank Aggarwal',
+    role: 'Legal Advisor',
+    img: '/mayank.JPG',
+    note: 'Negotiates allocations with India\'s top developers.',
   },
 ];
 
