@@ -217,18 +217,15 @@ export default function Hero() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-obsidian-900/40 via-transparent to-obsidian-900" />
       </div>
 
-      {/* Founder Portrait — massive, cinematic */}
+      {/* Founder Portrait — Bolted to the absolute right */}
       <div
         ref={portraitRef}
-        {/* FIX 1: Removed the flex wrapper completely. Bolted directly to right-0 and bottom-0 */}
         className="hero-parallax pointer-events-none absolute right-0 bottom-0 z-10 h-[75%] w-[85%] md:h-[90%] md:w-[55%] lg:w-[45%] max-w-[750px]"
       >
         <div
-          {/* FIX 2: bg-right forces the image pixels to strictly hug the right wall */}
           className="absolute inset-0 bg-cover bg-right bg-no-repeat"
           style={{
             backgroundImage: "url('/front-page.PNG')",
-            /* FIX 3: Horizontal fade! ONLY the left side fades to black. Right side is 100% solid. */
             maskImage:
               'linear-gradient(to bottom, black 75%, transparent 100%), linear-gradient(to right, transparent 0%, black 30%, black 100%)',
             WebkitMaskImage:
