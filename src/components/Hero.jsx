@@ -217,26 +217,27 @@ export default function Hero() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-obsidian-900/40 via-transparent to-obsidian-900" />
       </div>
 
-      {/* Founder Portrait — Bolted to the absolute right */}
+      {/* Founder Portrait — massive, cinematic */}
       <div
         ref={portraitRef}
-        className="hero-parallax pointer-events-none absolute right-0 bottom-0 z-10 h-[75%] w-[85%] md:h-[90%] md:w-[55%] lg:w-[45%] max-w-[750px]"
+        className="hero-parallax pointer-events-none absolute right-0 bottom-0 z-10 h-[75vh] w-full md:h-[90vh]"
       >
         <div
-          className="absolute inset-0 bg-cover bg-right bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-[right_top] md:bg-right bg-no-repeat"
           style={{
             backgroundImage: "url('/front-page.JPG')",
+            /* Left side fades smoothly out over 45% of the width, right side stays 100% solid all the way to the edge */
             maskImage:
-              'linear-gradient(to bottom, black 75%, transparent 100%), linear-gradient(to right, transparent 0%, black 30%, black 100%)',
+              'linear-gradient(to bottom, black 75%, transparent 100%), linear-gradient(to right, transparent 0%, black 45%, black 100%)',
             WebkitMaskImage:
-              'linear-gradient(to bottom, black 75%, transparent 100%), linear-gradient(to right, transparent 0%, black 30%, black 100%)',
+              'linear-gradient(to bottom, black 75%, transparent 100%), linear-gradient(to right, transparent 0%, black 45%, black 100%)',
             maskComposite: 'intersect',
             WebkitMaskComposite: 'source-in',
-            filter: 'grayscale(0.25) contrast(1.1) brightness(0.9)',
+            filter: 'grayscale(0.25) contrast(1.1) brightness(0.92)',
           }}
         />
-        {/* Gold glow pushed to the far right corner */}
-        <div className="absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle_at_100%_50%,_rgba(200,162,75,0.15),_transparent_60%)]" />
+        {/* Shifting the gold light flare directly behind his head */}
+        <div className="absolute right-0 bottom-0 -z-10 h-full w-[50%] rounded-full bg-[radial-gradient(circle_at_80%_50%,_rgba(191,161,129,0.15),_transparent_60%)]" />
       </div>
 
       {/* Typography overlay */}
