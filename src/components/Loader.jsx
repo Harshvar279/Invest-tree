@@ -37,11 +37,12 @@ export default function Loader({ onComplete }) {
             className="mb-12 text-center"
           >
             <p className="eyebrow mb-4">Est. Gurugram</p>
-            <h1 className="font-display text-5xl font-light tracking-tight text-pearl md:text-7xl">
-              Invest <span className="serif-italic gold-text">Tree</span>
+            <h1 className="font-display flex flex-col text-5xl font-light tracking-tight text-pearl md:text-7xl">
+              <span>Invest</span>
+              <span className="serif-italic text-gold-400">Tree</span>
             </h1>
-            <p className="mt-4 font-serif text-sm italic text-gold-200/70">
-              Where skylines take root.
+            <p className="mt-6 font-sans text-xs uppercase tracking-[0.2em] text-gold-200/70">
+              YOUR SATISFACTION, OUR EXPERTISE.
             </p>
           </motion.div>
 
