@@ -220,25 +220,27 @@ export default function Hero() {
       {/* Founder Portrait — massive, cinematic */}
       <div
         ref={portraitRef}
-        className="hero-parallax pointer-events-none absolute inset-x-0 bottom-0 z-10 flex h-full w-full items-end justify-end md:justify-center pr-2 md:pr-0"
+        {/* FIX 1: absolute right-0 and justify-end forces it perfectly to the right edge with zero gap */}
+        className="hero-parallax pointer-events-none absolute right-0 bottom-0 z-10 flex h-full w-full items-end justify-end"
       >
-        <div className="relative h-[75%] w-[85%] max-w-[640px] md:h-[88%] md:w-[44%]">
+        <div className="relative h-[80%] w-[90%] max-w-[650px] md:h-[90%] md:w-[48%]">
           <div
-            className="absolute inset-0 bg-cover bg-[20%_top] bg-no-repeat"
+            {/* FIX 2: bg-[right_top] ensures the photo anchors to the right side of the box */}
+            className="absolute inset-0 bg-cover bg-[center_top] md:bg-[right_top] bg-no-repeat"
             style={{
               backgroundImage: "url('/front-page.PNG')",
-              /* Expanded the black mask from 55% to 65% so it stops slicing his cheek! */
+              /* FIX 3: Changed to a horizontal fade! It now fades perfectly into the black on the left, keeping the right edge completely solid. */
               maskImage:
-                'linear-gradient(to bottom, black 70%, transparent 100%), radial-gradient(ellipse at 50% 45%, black 65%, transparent 90%)',
+                'linear-gradient(to bottom, black 70%, transparent 100%), linear-gradient(to right, transparent 0%, black 40%, black 100%)',
               WebkitMaskImage:
-                'linear-gradient(to bottom, black 70%, transparent 100%), radial-gradient(ellipse at 50% 45%, black 65%, transparent 90%)',
+                'linear-gradient(to bottom, black 70%, transparent 100%), linear-gradient(to right, transparent 0%, black 40%, black 100%)',
               maskComposite: 'intersect',
               WebkitMaskComposite: 'source-in',
               filter: 'grayscale(0.25) contrast(1.08) brightness(0.92)',
             }}
           />
-          {/* Gold glow behind */}
-          <div className="absolute -inset-10 -z-10 rounded-full bg-[radial-gradient(ellipse_at_center,_rgba(191,161,129,0.18),_transparent_60%)]" />
+          {/* Gold glow shifted to the right */}
+          <div className="absolute -inset-10 -z-10 rounded-full bg-[radial-gradient(ellipse_at_80%_50%,_rgba(191,161,129,0.18),_transparent_60%)]" />
         </div>
 
       {/* Typography overlay */}
