@@ -217,29 +217,31 @@ export default function Hero() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-obsidian-900/40 via-transparent to-obsidian-900" />
       </div>
 
-      {/* Founder Portrait — massive, cinematic */}
+            {/* Founder Portrait — perfectly blended & resized */}
       <div
         ref={portraitRef}
-        className="hero-parallax pointer-events-none absolute right-0 bottom-0 z-10 h-[75vh] w-full md:h-[90vh]"
+        {/* FIX 1: Shorter on mobile (h-[55vh]), and locked to a max width of 50% on desktop so it never blocks the left side! */}
+        className="hero-parallax pointer-events-none absolute right-0 bottom-0 z-10 h-[55vh] w-[95%] sm:h-[60vh] md:h-[85vh] md:w-[60%] lg:w-[50%] max-w-[700px]"
       >
         <div
-          className="absolute inset-0 bg-cover bg-[right_top] md:bg-right bg-no-repeat"
+          {/* FIX 2: Anchors his face firmly to the right side */}
+          className="absolute inset-0 bg-cover bg-[right_top] bg-no-repeat"
           style={{
             backgroundImage: "url('/front-page.JPG')",
-            /* Left side fades smoothly out over 45% of the width, right side stays 100% solid all the way to the edge */
+            /* FIX 3: Massive, ultra-soft fade on the left edge. This erases the hard line and reveals the 3D scene perfectly. */
             maskImage:
-              'linear-gradient(to bottom, black 75%, transparent 100%), linear-gradient(to right, transparent 0%, black 45%, black 100%)',
+              'linear-gradient(to top, transparent 0%, black 15%), linear-gradient(to right, transparent 0%, black 45%)',
             WebkitMaskImage:
-              'linear-gradient(to bottom, black 75%, transparent 100%), linear-gradient(to right, transparent 0%, black 45%, black 100%)',
+              'linear-gradient(to top, transparent 0%, black 15%), linear-gradient(to right, transparent 0%, black 45%)',
             maskComposite: 'intersect',
             WebkitMaskComposite: 'source-in',
-            filter: 'grayscale(0.25) contrast(1.1) brightness(0.92)',
+            filter: 'grayscale(0.2) contrast(1.15) brightness(0.9)',
           }}
         />
-        {/* Shifting the gold light flare directly behind his head */}
-        <div className="absolute right-0 bottom-0 -z-10 h-full w-[50%] rounded-full bg-[radial-gradient(circle_at_80%_50%,_rgba(191,161,129,0.15),_transparent_60%)]" />
+        {/* Subtle gold flare behind him */}
+        <div className="absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle_at_100%_50%,_rgba(200,162,75,0.1),_transparent_60%)]" />
       </div>
-
+    
       {/* Typography overlay */}
       <div className="container-x relative z-20 flex h-full flex-col justify-between pb-12 pt-32 md:pt-36">
         {/* Top eyebrow */}
