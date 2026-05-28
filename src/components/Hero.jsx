@@ -1,122 +1,9 @@
-import React, { Suspense, useRef, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Environment } from '@react-three/drei';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import * as THREE from 'three';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
-
-/* ---------- 3D: Procedural luxury tree / skyline ---------- */
-function GeometricStructure({ mouse }) {
-  const group = useRef();
-
-  useFrame((state, delta) => {
-    if (!group.current) return;
-    group.current.rotation.y += delta * 0.08;
-    // gentle parallax based on mouse
-    const targetX = mouse.current.y * 0.2;
-    const targetZ = mouse.current.x * 0.2;
-    group.current.rotation.x += (targetX - group.current.rotation.x) * 0.04;
-    group.current.rotation.z += (targetZ - group.current.rotation.z) * 0.04;
-  });
-
-  // Build pillars (skyline) + branches (tree)
-  const pillars = [];
-  for (let i = 0; i < 9; i++) {
-    const h = 1.4 + Math.random() * 2.6;
-    const x = (i - 4) * 0.42 + (Math.random() - 0.5) * 0.1;
-    const z = (Math.random() - 0.5) * 0.6;
-    pillars.push(
-      <mesh key={`p-${i}`} position={[x, h / 2 - 1.6, z]}>
-        <boxGeometry args={[0.18, h, 0.18]} />
-        <meshStandardMaterial
-          color="#C8A24B"
-          metalness={0.85}
-          roughness={0.25}
-          emissive="#3a2a0a"
-          emissiveIntensity={0.25}
-        />
-      </mesh>
-    );
-  }
-
-  const branches = [];
-  const branchCount = 14;
-  for (let i = 0; i < branchCount; i++) {
-    const angle = (i / branchCount) * Math.PI * 2;
-    const r = 1.6 + Math.random() * 0.7;
-    const x = Math.cos(angle) * r;
-    const z = Math.sin(angle) * r;
-    const y = 0.4 + Math.random() * 1.4;
-    branches.push(
-      <mesh
-        key={`b-${i}`}
-        position={[x * 0.6, y, z * 0.6]}
-        rotation={[Math.random(), angle, Math.random()]}
-      >
-        <cylinderGeometry args={[0.012, 0.04, 1.1 + Math.random() * 0.7, 8]} />
-        <meshStandardMaterial
-          color="#F2E8C9"
-          metalness={0.6}
-          roughness={0.4}
-          emissive="#1a1206"
-          emissiveIntensity={0.4}
-        />
-      </mesh>
-    );
-  }
-
-  return (
-    <group ref={group} position={[0, -0.4, 0]}>
-      {/* Trunk */}
-      <mesh position={[0, -0.2, 0]}>
-        <cylinderGeometry args={[0.18, 0.3, 2.4, 12]} />
-        <meshStandardMaterial
-          color="#0B1A2A"
-          metalness={0.9}
-          roughness={0.2}
-          emissive="#C8A24B"
-          emissiveIntensity={0.06}
-        />
-      </mesh>
-      {/* Crown sphere */}
-      <mesh position={[0, 1.4, 0]}>
-        <icosahedronGeometry args={[0.55, 1]} />
-        <meshStandardMaterial
-          color="#C8A24B"
-          metalness={1}
-          roughness={0.15}
-          wireframe
-        />
-      </mesh>
-      {pillars}
-      {branches}
-      {/* Ground ring */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.6, 0]}>
-        <ringGeometry args={[1.4, 2.4, 64]} />
-        <meshBasicMaterial color="#C8A24B" transparent opacity={0.08} side={THREE.DoubleSide} />
-      </mesh>
-    </group>
-  );
-}
-
-function Scene({ mouse }) {
-  return (
-    <>
-      <color attach="background" args={['#0A0A0B']} />
-      <fog attach="fog" args={['#0A0A0B', 4, 11]} />
-      <ambientLight intensity={0.25} />
-      <directionalLight position={[5, 6, 4]} intensity={0.9} color="#F2E8C9" />
-      <pointLight position={[-3, 2, -2]} intensity={0.6} color="#C8A24B" />
-      <Float speed={1.1} rotationIntensity={0.25} floatIntensity={0.6}>
-        <GeometricStructure mouse={mouse} />
-      </Float>
-      <Environment preset="city" />
-    </>
-  );
-}
 
 /* ---------- Split text helper ---------- */
 function SplitChars({ text, className = '', delay = 0 }) {
@@ -147,34 +34,12 @@ function SplitChars({ text, className = '', delay = 0 }) {
 
 /* ---------- Hero Component ---------- */
 export default function Hero() {
-  const mouse = useRef({ x: 0, y: 0 });
-  const portraitRef = useRef(null);
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    const handleMouse = (e) => {
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = (e.clientY / window.innerHeight) * 2 - 1;
-      mouse.current.x = x;
-      mouse.current.y = y;
-
-      if (portraitRef.current) {
-        gsap.to(portraitRef.current, {
-          x: x * -14,
-          y: y * -10,
-          duration: 1.2,
-          ease: 'power3.out',
-        });
-      }
-    };
-    window.addEventListener('mousemove', handleMouse);
-    return () => window.removeEventListener('mousemove', handleMouse);
-  }, []);
-
-  useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.to('.hero-parallax', {
-        yPercent: -18,
+      gsap.to('.hero-bg-parallax', {
+        yPercent: 12,
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -201,107 +66,95 @@ export default function Hero() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative h-[100svh] min-h-[720px] w-full overflow-hidden bg-obsidian-900"
+      className="relative h-[100svh] min-h-[720px] w-full overflow-hidden"
+      style={{ backgroundColor: '#0A0A0A' }}
     >
-      {/* 3D Canvas behind */}
-      <div className="absolute inset-0 z-0">
-        <Canvas
-          dpr={[1, 1.6]}
-          camera={{ position: [0, 0.6, 5], fov: 38 }}
-          gl={{ antialias: true, alpha: false }}
-        >
-          <Suspense fallback={null}>
-            <Scene mouse={mouse} />
-          </Suspense>
-        </Canvas>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-obsidian-900/40 via-transparent to-obsidian-900" />
-      </div>
-
-      {/* Founder Portrait — perfectly blended & resized to reveal 3D */}
-      <div
-        ref={portraitRef}
-        className="hero-parallax pointer-events-none absolute right-0 bottom-0 z-10 h-[55vh] w-[95%] sm:h-[60vh] md:h-[85vh] md:w-[60%] lg:w-[50%] max-w-[700px]"
-      >
+      {/* Architectural background image */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-[right_top] bg-no-repeat"
+          className="hero-bg-parallax absolute inset-0 scale-110 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('/front-page.JPG')",
-            maskImage:
-              'linear-gradient(to top, transparent 0%, black 15%), linear-gradient(to right, transparent 0%, black 45%)',
-            WebkitMaskImage:
-              'linear-gradient(to top, transparent 0%, black 15%), linear-gradient(to right, transparent 0%, black 45%)',
-            maskComposite: 'intersect',
-            WebkitMaskComposite: 'source-in',
-            filter: 'grayscale(0.2) contrast(1.15) brightness(0.9)',
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop')",
           }}
         />
-        {/* Subtle gold flare behind him */}
-        <div className="absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle_at_100%_50%,_rgba(200,162,75,0.1),_transparent_60%)]" />
+        {/* Luxury dark overlays for premium contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/80 via-[#0A0A0A]/60 to-[#0A0A0A]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_0%,_rgba(10,10,10,0.7)_100%)]" />
+        {/* Subtle gold glow accent */}
+        <div className="absolute -top-1/4 right-0 h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,_rgba(200,162,75,0.08),_transparent_70%)]" />
       </div>
 
       {/* Typography overlay */}
-      <div className="container-x relative z-20 flex h-full flex-col justify-between pb-12 pt-32 md:pt-36">
+      <div className="container-x relative z-20 flex h-full flex-col justify-between pb-16 pt-32 md:pt-36">
         {/* Top eyebrow */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.7 }}
+          transition={{ duration: 1, delay: 1.4 }}
           className="hero-fade-out flex items-center justify-between"
         >
           <p className="eyebrow">Luxury Real Estate · Gurugram</p>
           <p className="eyebrow hidden md:block">Est. — Counsel before Commission</p>
         </motion.div>
 
-        {/* Main heading */}
-        <div className="hero-fade-out relative">
-          <h1 className="display-heading flex flex-col text-[18vw] leading-[0.85] md:text-[13vw] lg:text-[11.5vw]">
+        {/* Main heading — centered for cinematic gravitas */}
+        <div className="hero-fade-out relative flex flex-col items-center text-center">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.6, duration: 1 }}
+            className="eyebrow mb-8 text-gold-300/80"
+          >
+            ✦ Private Real Estate Advisory ✦
+          </motion.p>
+
+          <h1 className="display-heading flex flex-col items-center text-[14vw] leading-[0.9] md:text-[10vw] lg:text-[8.5vw]">
             <span>
-              <SplitChars text="Invest" delay={1.9} />
+              <SplitChars text="We Architect" delay={1.8} />
             </span>
             <span className="serif-italic text-gold-400 inline-block">
-              <SplitChars text="Tree." delay={2.25} />
+              <SplitChars text="Legacies." delay={2.15} />
             </span>
           </h1>
 
-          {/* Side meta */}
-          <div className="mt-8 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.6, duration: 1, ease: 'easeOut' }}
-              className="max-w-md font-sans text-sm md:text-base tracking-[0.2em] uppercase text-pearl/90"
-            >
-              YOUR SATISFACTION, OUR EXPERTISE.
-            </motion.p>
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ delay: 2.6, duration: 1.2 }}
+            className="mt-10 h-px w-32 bg-gradient-to-r from-transparent via-gold-400 to-transparent"
+          />
 
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2.8, duration: 1, ease: 'easeOut' }}
-              className="flex items-center gap-6"
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.8, duration: 1, ease: 'easeOut' }}
+            className="mt-10 flex flex-col items-center gap-6 sm:flex-row sm:gap-8"
+          >
+            <a href="#contact" className="btn-gold">
+              Schedule Discreet Consultation
+            </a>
+            <a
+              href="#properties"
+              className="font-sans text-[11px] uppercase tracking-widest2 text-pearl/70 transition-colors hover:text-gold-300"
             >
-              <a href="#contact" className="btn-gold">
-                Begin Consultation
-              </a>
-              <a
-                href="#properties"
-                className="font-sans text-[11px] uppercase tracking-widest2 text-pearl/60 hover:text-gold-300"
-              >
-                View Portfolio →
-              </a>
-            </motion.div>
-          </div>
+              View Curated Portfolios →
+            </a>
+          </motion.div>
         </div>
+
+        {/* Empty spacer for layout balance */}
+        <div />
       </div>
 
-      {/* Bottom marquee tagline */}
-      <div className="absolute bottom-0 left-0 z-30 w-full overflow-hidden border-t border-pearl/10 bg-obsidian-900/40 py-3 backdrop-blur-sm">
+      {/* Bottom marquee — refined, no hollow tagline */}
+      <div className="absolute bottom-0 left-0 z-30 w-full overflow-hidden border-t border-pearl/10 bg-[#0A0A0A]/40 py-3 backdrop-blur-sm">
         <div className="marquee-track flex w-max gap-12 whitespace-nowrap font-serif italic text-gold-200/80">
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} className="flex items-center gap-12 text-sm md:text-base">
               Consultancy & Portfolio Advisory
               <span className="text-gold-500">✦</span>
-              Whiteland · M3M · Hero Homes · DLF
+              Whiteland · M3M · Hero Homes · DLF · Elan · Central Park
               <span className="text-gold-500">✦</span>
             </span>
           ))}
