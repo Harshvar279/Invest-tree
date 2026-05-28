@@ -220,28 +220,27 @@ export default function Hero() {
       {/* Founder Portrait — massive, cinematic */}
       <div
         ref={portraitRef}
-        {/* FIX 1: absolute right-0 and justify-end forces it perfectly to the right edge with zero gap */}
-        className="hero-parallax pointer-events-none absolute right-0 bottom-0 z-10 flex h-full w-full items-end justify-end"
+        {/* FIX 1: Removed the flex wrapper completely. Bolted directly to right-0 and bottom-0 */}
+        className="hero-parallax pointer-events-none absolute right-0 bottom-0 z-10 h-[75%] w-[85%] md:h-[90%] md:w-[55%] lg:w-[45%] max-w-[750px]"
       >
-        <div className="relative h-[80%] w-[90%] max-w-[650px] md:h-[90%] md:w-[48%]">
-          <div
-            {/* FIX 2: bg-[right_top] ensures the photo anchors to the right side of the box */}
-            className="absolute inset-0 bg-cover bg-[center_top] md:bg-[right_top] bg-no-repeat"
-            style={{
-              backgroundImage: "url('/front-page.PNG')",
-              /* FIX 3: Changed to a horizontal fade! It now fades perfectly into the black on the left, keeping the right edge completely solid. */
-              maskImage:
-                'linear-gradient(to bottom, black 70%, transparent 100%), linear-gradient(to right, transparent 0%, black 40%, black 100%)',
-              WebkitMaskImage:
-                'linear-gradient(to bottom, black 70%, transparent 100%), linear-gradient(to right, transparent 0%, black 40%, black 100%)',
-              maskComposite: 'intersect',
-              WebkitMaskComposite: 'source-in',
-              filter: 'grayscale(0.25) contrast(1.08) brightness(0.92)',
-            }}
-          />
-          {/* Gold glow shifted to the right */}
-          <div className="absolute -inset-10 -z-10 rounded-full bg-[radial-gradient(ellipse_at_80%_50%,_rgba(191,161,129,0.18),_transparent_60%)]" />
-        </div>
+        <div
+          {/* FIX 2: bg-right forces the image pixels to strictly hug the right wall */}
+          className="absolute inset-0 bg-cover bg-right bg-no-repeat"
+          style={{
+            backgroundImage: "url('/front-page.PNG')",
+            /* FIX 3: Horizontal fade! ONLY the left side fades to black. Right side is 100% solid. */
+            maskImage:
+              'linear-gradient(to bottom, black 75%, transparent 100%), linear-gradient(to right, transparent 0%, black 30%, black 100%)',
+            WebkitMaskImage:
+              'linear-gradient(to bottom, black 75%, transparent 100%), linear-gradient(to right, transparent 0%, black 30%, black 100%)',
+            maskComposite: 'intersect',
+            WebkitMaskComposite: 'source-in',
+            filter: 'grayscale(0.25) contrast(1.1) brightness(0.9)',
+          }}
+        />
+        {/* Gold glow pushed to the far right corner */}
+        <div className="absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle_at_100%_50%,_rgba(200,162,75,0.15),_transparent_60%)]" />
+      </div>
 
       {/* Typography overlay */}
       <div className="container-x relative z-20 flex h-full flex-col justify-between pb-12 pt-32 md:pt-36">
