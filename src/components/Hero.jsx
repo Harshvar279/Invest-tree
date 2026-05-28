@@ -227,7 +227,7 @@ export default function Hero() {
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?q=80&w=1400&auto=format&fit=crop')",
+                "url('/front-page.PNG')",
               maskImage:
                 'linear-gradient(to bottom, black 70%, transparent 100%), radial-gradient(ellipse at 50% 40%, black 55%, transparent 80%)',
               WebkitMaskImage:
