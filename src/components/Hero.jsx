@@ -217,19 +217,15 @@ export default function Hero() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-obsidian-900/40 via-transparent to-obsidian-900" />
       </div>
 
-     {/* Founder Portrait — perfectly blended & resized */
-      }
+      {/* Founder Portrait — perfectly blended & resized to reveal 3D */}
       <div
         ref={portraitRef}
-        {/* FIX 1: Shorter on mobile (h-[55vh]), and locked to a max width of 50% on desktop so it never blocks the left side! */}
         className="hero-parallax pointer-events-none absolute right-0 bottom-0 z-10 h-[55vh] w-[95%] sm:h-[60vh] md:h-[85vh] md:w-[60%] lg:w-[50%] max-w-[700px]"
       >
         <div
-          {/* FIX 2: Anchors his face firmly to the right side */}
           className="absolute inset-0 bg-cover bg-[right_top] bg-no-repeat"
           style={{
             backgroundImage: "url('/front-page.JPG')",
-            /* FIX 3: Massive, ultra-soft fade on the left edge. This erases the hard line and reveals the 3D scene perfectly. */
             maskImage:
               'linear-gradient(to top, transparent 0%, black 15%), linear-gradient(to right, transparent 0%, black 45%)',
             WebkitMaskImage:
@@ -242,7 +238,7 @@ export default function Hero() {
         {/* Subtle gold flare behind him */}
         <div className="absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle_at_100%_50%,_rgba(200,162,75,0.1),_transparent_60%)]" />
       </div>
-    
+
       {/* Typography overlay */}
       <div className="container-x relative z-20 flex h-full flex-col justify-between pb-12 pt-32 md:pt-36">
         {/* Top eyebrow */}
@@ -259,8 +255,10 @@ export default function Hero() {
         {/* Main heading */}
         <div className="hero-fade-out relative">
           <h1 className="display-heading flex flex-col text-[18vw] leading-[0.85] md:text-[13vw] lg:text-[11.5vw]">
-            <span><SplitChars text="Invest" delay={1.9} /></span>
-            <span className="serif-italic text-gold-400">
+            <span>
+              <SplitChars text="Invest" delay={1.9} />
+            </span>
+            <span className="serif-italic text-gold-400 inline-block">
               <SplitChars text="Tree." delay={2.25} />
             </span>
           </h1>
