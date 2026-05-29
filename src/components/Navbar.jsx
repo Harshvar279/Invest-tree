@@ -10,7 +10,8 @@ const links = [
   { label: 'Contact', href: '#contact' },
 ];
 
-export default function Navbar() {
+/* Notice we added { onOpenTeam } here so it can trigger the popup */
+export default function Navbar({ onOpenTeam }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -22,7 +23,15 @@ export default function Navbar() {
 
   const handleClick = (e, href) => {
     e.preventDefault();
-    setOpen(false);
+    setOpen(false); // Always close the mobile menu when clicking
+
+    // THE FIX: If they click "Team", launch the popup instead of scrolling!
+    if (href === '#team') {
+      if (onOpenTeam) onOpenTeam();
+      return;
+    }
+
+    // Otherwise, scroll normally to the section
     setTimeout(() => scrollToSection(href), 100);
   };
 
@@ -34,7 +43,7 @@ export default function Navbar() {
         transition={{ duration: 1.2, delay: 1.6, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 z-50 w-full transition-all duration-700 ${
           scrolled
-            ? 'bg-obsidian-900/80 backdrop-blur-md py-4'
+            ? 'bg-[#0A0A0A]/90 backdrop-blur-md py-4 border-b border-pearl/5'
             : 'bg-transparent py-7'
         }`}
       >
@@ -85,7 +94,7 @@ export default function Navbar() {
             animate={{ y: 0 }}
             exit={{ y: '-100%' }}
             transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[80] flex flex-col bg-obsidian-900 px-6 pb-10 pt-7"
+            className="fixed inset-0 z-[80] flex flex-col bg-[#0A0A0A] px-6 pb-10 pt-7"
           >
             <div className="flex items-center justify-between">
               <span className="font-display text-2xl text-pearl">
